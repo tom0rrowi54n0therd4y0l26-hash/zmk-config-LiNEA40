@@ -57,7 +57,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,,,,,,,
+            //スクロール方向を逆転,,,,,,,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -134,10 +134,10 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &msc SCRL_LEFT  &msc SCRL_RIGHT  &mkp MB3  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans          &mkp MB1         &mkp MB2  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans          &trans           &trans    &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans                           &trans    &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans    &mkp MB3  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &mkp MB1  &mkp MB2  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans    &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans            &trans    &trans  &trans
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -145,10 +145,10 @@
 
         Symbol {
             bindings = <
-&kp EXCLAMATION  &kp AT_SIGN           &kp HASH               &kp DOLLAR        &kp PERCENT                          &kp CARET  &kp AMPERSAND  &kp ASTERISK      &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS
-&kp SQT          &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp LEFT_BRACKET  &kp RIGHT_BRACKET                    &kp MINUS  &kp EQUAL      &kp LEFT_BRACKET  &kp RIGHT_BRACKET     &kp BACKSLASH
-&trans           &trans                &trans                 &trans            &trans                               &trans     &trans         &kp SEMICOLON     &kp SQT               &kp DOUBLE_QUOTES
-&kp ESC          &trans                &trans                 &trans            &trans             &trans    &trans  &trans                    &trans            &trans                &trans
+&kp EXCLAMATION  &kp AT_SIGN  &kp HASH  &kp DOLLAR  &kp PERCENT                    &kp CARET  &kp AMPERSAND      &kp ASTERISK      &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS
+&trans           &trans       &trans    &trans      &trans                         &kp MINUS  &kp EQUAL          &kp LEFT_BRACKET  &kp RIGHT_BRACKET     &kp BACKSLASH
+&trans           &trans       &trans    &trans      &trans                         &trans     &kp DOUBLE_QUOTES  &kp SEMICOLON     &kp SQT               &kp GRAVE
+&kp ESC          &trans       &trans    &trans      &trans       &trans    &trans  &trans                        &trans            &trans                &trans
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_RIGHT SCRL_LEFT>;
@@ -161,14 +161,16 @@
 &trans  &trans  &trans  &trans  &trans                    &trans  &kp N1  &kp N2   &kp N3    &kp ASTERISK
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &kp N0          &kp DOT  &kp FSLH  &kp ENTER
             >;
+
+            sensor-bindings = <&mouse_scrl SCRL_RIGHT SCRL_LEFT>;
         };
 
         Function {
             bindings = <
-&kp F1  &kp F2  &kp F3  &kp F4   &kp F5                     &kp LG(D)  &kp LG(LC(LEFT_ARROW))  &kp UP_ARROW  &kp LG(LC(RIGHT_ARROW))  &kp LC(LA(DELETE))
-&kp F6  &kp F7  &kp F8  &kp F9   &kp F10                    &trans     &kp LEFT_ARROW          &kp DOWN      &kp RIGHT_ARROW          &trans
-&trans  &trans  &trans  &kp F11  &kp F12                    &trans     &trans                  &trans        &trans                   &trans
-&trans  &trans  &trans  &trans   &trans   &trans    &trans  &trans                             &trans        &trans                   &kp LA(LC(DELETE))
+&kp F1  &kp F2  &kp F3  &kp F4   &kp F5                           &kp LG(D)      &kp LA(LS(TAB))  &kp UP_ARROW  &kp LA(TAB)      &kp LA(LC(DELETE))
+&kp F6  &kp F7  &kp F8  &kp F9   &kp F10                          &kp HOME       &kp LEFT_ARROW   &kp DOWN      &kp RIGHT_ARROW  &kp END
+&trans  &trans  &trans  &kp F11  &kp F12                          &kp LG(TAB)    &kp LG(LEFT)     &kp LG(UP)    &kp LG(RIGHT)    &trans
+&trans  &trans  &trans  &trans   &trans   &trans    &kp LA(LEFT)  &kp LA(RIGHT)                   &trans        &trans           &kp C_MUTE
             >;
         };
 
