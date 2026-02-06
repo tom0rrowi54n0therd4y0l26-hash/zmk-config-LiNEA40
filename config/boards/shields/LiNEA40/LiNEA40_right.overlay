@@ -1,4 +1,5 @@
 #include "LiNEA40.dtsi"
+#include <input/processors.dtsi>        // 自分で追加したヘッダ
 &default_transform {
     col-offset = <6>;
 };
@@ -13,10 +14,22 @@
         ;
 };
 
+&zip_temp_layer {        // 自分で追加した関数 非マウスキーを押したらタイムアウトに関係なくマウスレイヤーを抜ける
+    excluded-positions = <
+        18 // J
+        19 // K
+        21 // ;
+        34 // Ctrl
+    >;
+    require-prior-idle-ms = <200>;    // 自分で追加した関数  キー入力中のオートマウスレイヤー誤爆防止
+};
+
 / {
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
+
+        input-processors = <&zip_temp_layer 1 10000>;        //トラボ使用後10秒間、レイヤー1が有効(自分で設定追加)
 
     };
 };
