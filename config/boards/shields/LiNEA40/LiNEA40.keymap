@@ -13,7 +13,7 @@
 #define SCROLL 5
 #define WIRELESS 6
 
-//mouse cursol
+//mouse cursol//mouse cursol
 &mmv {
     delay-ms = <20>;
     trigger-period-ms = <5>;
