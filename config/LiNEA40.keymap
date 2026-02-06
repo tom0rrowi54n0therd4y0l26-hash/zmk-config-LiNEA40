@@ -57,7 +57,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,,,,,,,,,,,,
+            //スクロール方向を逆転,,,,,,,,,,,,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -147,7 +147,7 @@
             bindings = <
 &kp EXCLAMATION  &kp AT_SIGN  &kp HASH  &kp DOLLAR  &kp PERCENT                    &kp CARET  &kp AMPERSAND      &kp ASTERISK      &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS
 &trans           &trans       &trans    &trans      &trans                         &kp MINUS  &kp EQUAL          &kp LEFT_BRACKET  &kp RIGHT_BRACKET     &kp BACKSLASH
-&trans           &trans       &trans    &trans      &trans                         &trans     &kp DOUBLE_QUOTES  &kp SEMICOLON     &kp SQT               &kp GRAVE
+&trans           &trans       &trans    &trans      &trans                         &trans     &kp DOUBLE_QUOTES  &kp SEMICOLON     &kp UNDERSCORE        &kp GRAVE
 &kp ESC          &trans       &trans    &trans      &trans       &trans    &trans  &trans                        &trans            &trans                &trans
             >;
 
