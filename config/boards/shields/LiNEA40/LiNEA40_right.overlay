@@ -1,5 +1,5 @@
 #include "LiNEA40.dtsi"        
-#include <input/processors.dtsi>        // 自分で追加したヘッダ
+//#include <input/processors.dtsi>        // 自分で追加したヘッダ
 &default_transform {
     col-offset = <6>;
 };
@@ -8,28 +8,28 @@
     col-gpios
         = <&xiao_d 10 GPIO_ACTIVE_HIGH> //col0-D10
         , <&xiao_d 9 GPIO_ACTIVE_HIGH>  //col1-D9
-        , <&xiao_d 8 GPIO_ACTIVE_HIGH>  //col2-D8
+        , <&xiao_d 8 GPIO_ACTIVE_HIGH> //col2-D8
         , <&xiao_d 7 GPIO_ACTIVE_HIGH>  //col3-D7
         , <&gpio0 10 GPIO_ACTIVE_HIGH>  //col4-NFC2
         ;
 };
 
-&zip_temp_layer {        // 自分で追加した関数 非マウスキーを押したらタイムアウトに関係なくマウスレイヤーを抜ける
-    excluded-positions = <
-        18 // J
-        19 // K
-        21 // ;
-        34 // Ctrl
-    >;
-    require-prior-idle-ms = <200>;    // 自分で追加した関数  キー入力中のオートマウスレイヤー誤爆防止
-};
+//&zip_temp_layer {        // 自分で追加した関数 非マウスキーを押したらタイムアウトに関係なくマウスレイヤーを抜ける
+//    excluded-positions = <
+//        18 // J
+//        19 // K
+//        21 // ;
+//        34 // Ctrl
+//    >;
+//    require-prior-idle-ms = <200>;    // 自分で追加した関数  キー入力中のオートマウスレイヤー誤爆防止
+//};
 
 / {
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        input-processors = <&zip_temp_layer 1 10000>;        //トラボ使用後10秒間、レイヤー1が有効(自分で設定追加)
+//        input-processors = <&zip_temp_layer 1 10000>;        //トラボ使用後10秒間、レイヤー1が有効(自分で設定追加)
 
     };
 };
@@ -70,7 +70,7 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&xiao_d 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; //MOT-D6
-        //automouse-layer = <1>;        //&zip_temp_layer使うために機能無効化
+        automouse-layer = <1>;        //&zip_temp_layer使うために機能無効化  →中止
         snipe-layers = <2>;
         scroll-layers = <5>;
         //scroll-layers = <4 5 6>;
