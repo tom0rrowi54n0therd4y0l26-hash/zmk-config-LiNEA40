@@ -1,4 +1,4 @@
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 150
+aq#define ZMK_POINTING_DEFAULT_SCRL_VAL 150
 
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
@@ -119,7 +119,7 @@
     };
 
     macros {
-        new_macro: new_macro {
+        ime_toggle: ime_toggle {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings =
