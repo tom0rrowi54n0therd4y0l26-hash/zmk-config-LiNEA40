@@ -1,5 +1,5 @@
 #include "LiNEA40.dtsi"
-#include <input/processors.dtsi>        // 自分で追加したヘッダ
+//#include <input/processors.dtsi>        // 自分で追加したヘッダ
 &default_transform {
     col-offset = <6>;
 };
