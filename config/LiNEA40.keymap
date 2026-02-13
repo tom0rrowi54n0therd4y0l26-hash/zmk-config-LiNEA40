@@ -64,7 +64,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転
+            //スクロール方向を逆転,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -73,30 +73,28 @@
     combos {
         compatible = "zmk,combos";
 
-//        ZenkakuHankaku {
-//            bindings = <&kp GRAVE>;
-//            key-positions = <11 12>;
-//        };
+        //        ZenkakuHankaku {
+        //            bindings = <&kp GRAVE>;
+        //            key-positions = <11 12>;
+        //        };
 
         DeleteKey {
             bindings = <&kp DEL>;
             key-positions = <7 8>;
         };
 
-//        InsertKey {
-//            bindings = <&kp INS>;
-//            key-positions = <6 7>;
-//        };
-
-//        CenterClick {
-//            bindings = <&mkp MB3>;
-//            key-positions = <17 16>;
-//        };
-
-//        RightClick {
-//            bindings = <&mkp MB2>;
-//            key-positions = <18 17>;
-//        };
+        //        InsertKey {
+        //            bindings = <&kp INS>;
+        //            key-positions = <6 7>;
+        //        };
+        //        CenterClick {
+        //            bindings = <&mkp MB3>;
+        //            key-positions = <17 16>;
+        //        };
+        //        RightClick {
+        //            bindings = <&mkp MB2>;
+        //            key-positions = <18 17>;
+        //        };
 
         PrevClick {
             bindings = <&mkp MB4>;
@@ -195,6 +193,8 @@
 &trans  &trans  &trans  &kp F11  &kp F12                          &kp LG(TAB)    &kp LG(LEFT)     &kp LG(UP)    &kp LG(RIGHT)    &kp LG(D)
 &trans  &trans  &trans  &trans   &trans   &trans    &kp LA(LEFT)  &kp LA(RIGHT)                   &trans        &trans           &kp C_MUTE
             >;
+
+            sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
         };
 
         BLE_setting {
