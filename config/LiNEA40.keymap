@@ -1,4 +1,4 @@
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 15
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 150
 
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
@@ -27,10 +27,10 @@
 //mouse scroll
 
 &msc {
-    delay-ms = <10>; //<3>;chatGPTおすすめにより変更
-    trigger-period-ms = <15>; //<3>;chatGPTおすすめにより変更
-    time-to-max-speed-ms = <300>; //<100>;chatGPTおすすめにより変更
-    acceleration-exponent = <1>; //<0>;chatGPTおすすめにより変更
+    delay-ms = <3>;//<10>; chatGPTおすすめにより変更
+    trigger-period-ms = <3>; //<15>; chatGPTおすすめにより変更
+    time-to-max-speed-ms = <100>; //<300>; chatGPTおすすめにより変更
+    acceleration-exponent = <0>; //<1>; chatGPTおすすめにより変更
 };
 
 / {
