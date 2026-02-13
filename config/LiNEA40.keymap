@@ -19,18 +19,18 @@
 
 &mmv {
     delay-ms = <20>;
-    trigger-period-ms = <5>;
-    time-to-max-speed-ms = <100>;
-    acceleration-exponent = <2>;
+    trigger-period-ms = <20>; //<5>; chatGPTおすすめにより変更
+    time-to-max-speed-ms = <300>; //<100>; chatGPTおすすめにより変更
+    acceleration-exponent = <1>; //<2>; chatGPTおすすめにより変更
 };
 
 //mouse scroll
 
 &msc {
-    delay-ms = <3>;
-    trigger-period-ms = <3>;
-    time-to-max-speed-ms = <100>;
-    acceleration-exponent = <0>;
+    delay-ms = <10>; //<3>;chatGPTおすすめにより変更
+    trigger-period-ms = <15>; //<3>;chatGPTおすすめにより変更
+    time-to-max-speed-ms = <300>; //<100>;chatGPTおすすめにより変更
+    acceleration-exponent = <1>; //<0>;chatGPTおすすめにより変更
 };
 
 / {
