@@ -57,7 +57,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,,
+            //スクロール方向を逆転
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -66,30 +66,30 @@
     combos {
         compatible = "zmk,combos";
 
-        ZenkakuHankaku {
-            bindings = <&kp GRAVE>;
-            key-positions = <11 12>;
-        };
+//        ZenkakuHankaku {
+//            bindings = <&kp GRAVE>;
+//            key-positions = <11 12>;
+//        };
 
         DeleteKey {
             bindings = <&kp DEL>;
             key-positions = <7 8>;
         };
 
-        InsertKey {
-            bindings = <&kp INS>;
-            key-positions = <6 7>;
-        };
+//        InsertKey {
+//            bindings = <&kp INS>;
+//            key-positions = <6 7>;
+//        };
 
-        CenterClick {
-            bindings = <&mkp MB3>;
-            key-positions = <17 16>;
-        };
+//        CenterClick {
+//            bindings = <&mkp MB3>;
+//            key-positions = <17 16>;
+//        };
 
-        RightClick {
-            bindings = <&mkp MB2>;
-            key-positions = <18 17>;
-        };
+//        RightClick {
+//            bindings = <&mkp MB2>;
+//            key-positions = <18 17>;
+//        };
 
         PrevClick {
             bindings = <&mkp MB4>;
