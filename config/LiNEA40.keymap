@@ -47,19 +47,19 @@
             type = <INPUT_EV_REL>;
             codes = <INPUT_REL_WHEEL>;
             track-remainders;
- };
+        };
+
             // --- ZMK Studio (DYA) 用にこれらを追加 ---
             scroll_runtime_input_processor: scroll_runtime_input_processor {
             compatible = "zmk,input-processor-runtime-settings";
             #input-processor-cells = <0>;
-            };
+        };
 
             mouse_runtime_input_processor: mouse_runtime_input_processor {
             compatible = "zmk,input-processor-runtime-settings";
             #input-processor-cells = <0>;
             };
         };
-    };
 
 &msc_input_listener {
     // 全体に対して Studio からの動的な設定変更を有効化 20260405_DYA studio対応により追加
