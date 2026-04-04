@@ -4,6 +4,7 @@
 #include <input/processors.dtsi>
 
 //#include <zephyr/dt-bindings/input/input-event-codes.h>　20260405_DYA studio対応により削除
+
 #include <input/processors/runtime-input-processor.dtsi>　//20260405_DYA studio対応により追加
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
@@ -50,6 +51,7 @@
 
 &msc_input_listener {
     // 全体に対して Studio からの動的な設定変更を有効化　20260405_DYA studio対応により追加
+
     input-processors = <&scroll_runtime_input_processor>;
 
     speed_up {
@@ -59,14 +61,14 @@
 };
 
 &trackball_listener {
-　　// 1. 通常時のプロセッサにDYA Studioの処理を挟み込む　20260405_DYA studio対応により追加
+    　　// 1. 通常時のプロセッサにDYA Studioの処理を挟み込む　20260405_DYA studio対応により追加
     input-processors = <&mouse_runtime_input_processor>;
 
     scroller {
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,
+            //スクロール方向を逆転,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -201,10 +203,10 @@
 
         BLE_setting {
             bindings = <
-&bt BT_SEL 0    &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4                     &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4
-&bt BT_DISC 0   &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4                    &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4
-&trans          &trans         &trans         &trans         &trans                           &trans         &trans         &trans         &trans         &trans
-&bt BT_CLR_ALL  &bt BT_CLR     &trans         &trans         &trans         &trans    &trans  &trans                        &trans         &bt BT_CLR     &bt BT_CLR_ALL
+&bt BT_SEL 0    &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4                      &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4
+&bt BT_DISC 0   &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4                     &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4
+&trans          &trans         &trans         &trans         &studio_unlock                    &trans         &trans         &trans         &trans         &trans
+&bt BT_CLR_ALL  &bt BT_CLR     &trans         &trans         &trans          &trans    &trans  &trans                        &trans         &bt BT_CLR     &bt BT_CLR_ALL
             >;
 
             sensor-bindings = <&re_kp C_VOLUME_DOWN C_VOLUME_UP>;
