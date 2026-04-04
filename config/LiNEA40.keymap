@@ -23,7 +23,7 @@
 //#define SCROLL 5
 //#define WIRELESS 6
 
-//mouse cursol
+// --- Mouse cursor settings ---
 &mmv {
     delay-ms = <20>;
     trigger-period-ms = <20>; //<5>; chatGPTおすすめにより変更
@@ -31,7 +31,7 @@
     acceleration-exponent = <1>; //<2>; chatGPTおすすめにより変更
 };
 
-//mouse scroll
+// --- Mouse scroll settings ---
 &msc {
     delay-ms = <3>;//<10>; chatGPTおすすめにより変更
     trigger-period-ms = <3>; //<15>; chatGPTおすすめにより変更
@@ -49,42 +49,47 @@
             track-remainders;
         };
 
-            // --- ZMK Studio (DYA) 用にこれらを追加 ---
-            scroll_runtime_input_processor: scroll_runtime_input_processor {
+        // --- ZMK Studio (DYA) 用にこれらを追加 ---
+        scroll_runtime_input_processor: scroll_runtime_input_processor {
             compatible = "zmk,input-processor-runtime-settings";
             #input-processor-cells = <0>;
         };
 
-            mouse_runtime_input_processor: mouse_runtime_input_processor {
+        mouse_runtime_input_processor: mouse_runtime_input_processor {
             compatible = "zmk,input-processor-runtime-settings";
             #input-processor-cells = <0>;
         };
     };
 
-&msc_input_listener {
-    // 全体に対して Studio からの動的な設定変更を有効化 20260405_DYA studio対応により追加
-    input-processors = <&scroll_runtime_input_processor>;
+    // 2. Input Listeners
+    // ※ &xxx_listener はルート (/) の内側、かつ input_processors の外側に配置します
+    msc_input_listener: msc_input_listener {
+        compatible = "zmk,input-listener";
+        device = <&msc>;
+        // 全体に対して Studio からの動的な設定変更を有効化 20260405_DYA studio対応により追加
+        input-processors = <&scroll_runtime_input_processor>;
 
-    speed_up {
-        layers = <4>;
-        input-processors = <&zip_wheel_scaler 3 1>; //スクロールを3倍速にする
+        speed_up {
+            layers = <4>;
+            input-processors = <&zip_wheel_scaler 3 1>; //スクロールを3倍速にする
+        };
     };
-};
 
-&trackball_listener {
-    // 1. 通常時のプロセッサにDYA Studioの処理を挟み込む 20260405_DYA studio対応により追加
-    input-processors = <&mouse_runtime_input_processor>;
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&pd0>; // デバイス名はシールドの定義に合わせて適宜修正してください
+        // 1. 通常時のプロセッサにDYA Studioの処理を挟み込む 20260405_DYA studio対応により追加
+        input-processors = <&mouse_runtime_input_processor>;
 
-    scroller {
-        layers = <3>;
-        input-processors =
+        scroller {
+            layers = <3>;
+            input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
             //スクロール方向を逆転
             <&zip_xy_to_scroll_mapper>;
+        };
     };
-};
 
-/ {
     combos {
         compatible = "zmk,combos";
 
