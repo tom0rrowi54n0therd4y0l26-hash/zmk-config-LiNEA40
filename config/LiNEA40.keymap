@@ -49,17 +49,17 @@
             track-remainders;
         };
 
-        // --- ZMK Studio (DYA) 用にこれらを追加 ---
-        scroll_runtime_input_processor: scroll_runtime_input_processor {
-            compatible = "zmk,input-processor-runtime-settings";
-            #input-processor-cells = <0>;
-        };
+//        // --- ZMK Studio (DYA) 用にこれらを追加 ---
+//        scroll_runtime_input_processor: scroll_runtime_input_processor {
+//            compatible = "zmk,input-processor-runtime-settings";
+//            #input-processor-cells = <0>;
+//        };
 
-        mouse_runtime_input_processor: mouse_runtime_input_processor {
-            compatible = "zmk,input-processor-runtime-settings";
-            #input-processor-cells = <0>;
-        };
-    };
+//        mouse_runtime_input_processor: mouse_runtime_input_processor {
+//           compatible = "zmk,input-processor-runtime-settings";
+//            #input-processor-cells = <0>;
+//        };
+//    };
 
     // 2. Input Listeners
     // ※ &xxx_listener はルート (/) の内側、かつ input_processors の外側に配置します
