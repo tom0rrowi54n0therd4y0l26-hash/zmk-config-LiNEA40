@@ -16,7 +16,7 @@
 #define Symbol 2
 #define Number 3
 #define Function 4
-#degine BLE_setting 5
+#define BLE_setting 5
 //#define MARK 2
 //#define CURSOR 3
 //#define FUNCTION 4
@@ -24,7 +24,6 @@
 //#define WIRELESS 6
 
 //mouse cursol
-
 &mmv {
     delay-ms = <20>;
     trigger-period-ms = <20>; //<5>; chatGPTおすすめにより変更
@@ -33,7 +32,6 @@
 };
 
 //mouse scroll
-
 &msc {
     delay-ms = <3>;//<10>; chatGPTおすすめにより変更
     trigger-period-ms = <3>; //<15>; chatGPTおすすめにより変更
@@ -45,7 +43,7 @@
     input_processors {
         zip_wheel_scaler: zip_wheel_scaler {
             compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
+            input-processor-cells = <2>;
             type = <INPUT_EV_REL>;
             codes = <INPUT_REL_WHEEL>;
             track-remainders;
@@ -55,7 +53,6 @@
 
 &msc_input_listener {
     // 全体に対して Studio からの動的な設定変更を有効化 20260405_DYA studio対応により追加
-
     input-processors = <&scroll_runtime_input_processor>;
 
     speed_up {
