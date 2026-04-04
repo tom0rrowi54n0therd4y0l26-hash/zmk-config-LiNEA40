@@ -77,7 +77,7 @@
 
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
-        device = <&pd0>; // デバイス名はシールドの定義に合わせて適宜修正してください
+        device = <&trackball>; // デバイス名はシールドの定義に合わせて適宜修正してください
         // 1. 通常時のプロセッサにDYA Studioの処理を挟み込む 20260405_DYA studio対応により追加
         input-processors = <&mouse_runtime_input_processor>;
 
