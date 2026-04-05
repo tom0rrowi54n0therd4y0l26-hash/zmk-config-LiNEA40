@@ -2,6 +2,7 @@
 
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
+#include <input/processors/runtime-input-processor.dtsi> //DYA Studio対応のため追加(20260405)
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
@@ -22,7 +23,6 @@
 #define WIRELESS 11      // ここを11に修正！
 
 //mouse cursol
-
 &mmv {
     delay-ms = <20>;
     trigger-period-ms = <20>; //<5>; chatGPTおすすめにより変更
@@ -31,7 +31,6 @@
 };
 
 //mouse scroll
-
 &msc {
     delay-ms = <3>;//<10>; chatGPTおすすめにより変更
     trigger-period-ms = <3>; //<15>; chatGPTおすすめにより変更
@@ -52,6 +51,8 @@
 };
 
 &msc_input_listener {
+    input-processors = <&scroll_runtime_input_processor>; //DYA Studio対応のため追加(20260405)
+
     speed_up {
         layers = <FUNCTION>;
         input-processors = <&zip_wheel_scaler 3 1>; //スクロールを3倍速にする
@@ -59,11 +60,13 @@
 };
 
 &trackball_listener {
+    input-processors = <&mouse_runtime_input_processor>; //DYA Studio対応のため追加(20260405)
+
     scroller {
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,
+            //スクロール方向を逆転
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -200,7 +203,7 @@
             bindings = <
 &bt BT_SEL 0    &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4                     &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4
 &bt BT_DISC 0   &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4                    &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4
-&trans          &trans         &trans         &trans         &trans                           &trans         &trans         &trans         &trans         &trans
+&trans          &trans         &trans         &trans         &studio_unlock                           &trans         &trans         &trans         &trans         &trans
 &bt BT_CLR_ALL  &bt BT_CLR     &trans         &trans         &trans         &trans    &trans  &trans                        &trans         &bt BT_CLR     &bt BT_CLR_ALL
             >;
 
