@@ -75,6 +75,13 @@
     compatible = "zmk,input-listener";
     device = <&trackball>;
 
-    input-processors = <&zip_temp_layer 1 10000>;        //トラボ使用後10秒間レイヤー1が有効(自分で設定追加)
-
+    input-processors = <&zip_temp_layer 1 10000>,        //トラボ使用後10秒間レイヤー1が有効(自分で設定追加)
+                       <&mouse_runtime_input_processor>;    //DYA studio対応のため追加(20260405)
+    // スクロール設定もここに統合 DYA studio対応のため追加(20260405)
+    scroller {
+        layers = <SCROLL>;
+        input-processors =
+            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+            <&zip_xy_to_scroll_mapper>;
+    };
 };
