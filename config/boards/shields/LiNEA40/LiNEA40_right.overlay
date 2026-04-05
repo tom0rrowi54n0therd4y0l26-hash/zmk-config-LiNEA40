@@ -79,7 +79,7 @@
                        <&mouse_runtime_input_processor>;    //DYA studio対応のため追加(20260405)
     // スクロール設定もここに統合 DYA studio対応のため追加(20260405)
     scroller {
-        layers = <SCROLL>;
+        layers = <10>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
             <&zip_xy_to_scroll_mapper>;
