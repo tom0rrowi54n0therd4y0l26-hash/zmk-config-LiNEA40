@@ -13,7 +13,7 @@
 #define MOUSE 1
 #define SYMBOL 2
 #define NUMBER 3
-#define FUNCTION 4// 元のFunctionレイヤー
+#define FUNCTION 4
 #define BLE_SETTING 5
 #define DEFAULT_LAYER_2 6 // 2つ目のデフォルトレイヤー
 #define MARK 7
@@ -59,19 +59,18 @@
     };
 };
 
-/*
 &trackball_listener {
-    //input-processors = <&mouse_runtime_input_processor>; //DYA Studio対応のため追加(20260405)
+    input-processors = <&mouse_runtime_input_processor>; //DYA Studio対応のため追加(20260405)
 
     scroller {
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
             //スクロール方向を逆転
-            <&zip_xy_to_scroll_mapper>;
+            <&zip_xy_to_scroll_mapper>,
+            <&scroll_runtime_input_processor>; // ★DYA Studio対応のためここに追加
     };
 };
-*/
 
 / {
     combos {
