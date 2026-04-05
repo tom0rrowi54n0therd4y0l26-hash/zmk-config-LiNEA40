@@ -59,6 +59,7 @@
     };
 };
 
+/*
 &trackball_listener {
     //input-processors = <&mouse_runtime_input_processor>; //DYA Studio対応のため追加(20260405)
 
@@ -70,6 +71,7 @@
             <&zip_xy_to_scroll_mapper>;
     };
 };
+*/
 
 / {
     combos {
