@@ -19,8 +19,8 @@
 #define MARK 7
 #define CURSOR 8
 #define FUNCTION_LOWER 9       // 追加されたFUNCTIONレイヤー
-#define SCROLL 10        // ここを10に修正！
-#define WIRELESS 11      // ここを11に修正！
+#define SCROLL 10
+#define WIRELESS 11
 
 //mouse cursol
 &mmv {
@@ -60,7 +60,7 @@
 };
 
 &trackball_listener {
-    input-processors = <&mouse_runtime_input_processor>; //DYA Studio対応のため追加(20260405)
+    //input-processors = <&mouse_runtime_input_processor>; //DYA Studio対応のため追加(20260405)
 
     scroller {
         layers = <SCROLL>;
