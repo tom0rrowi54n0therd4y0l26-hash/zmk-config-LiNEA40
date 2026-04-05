@@ -9,11 +9,16 @@
 #include <dt-bindings/zmk/pointing.h>
 
 #define MOUSE 1
-#define MARK 2
-#define CURSOR 3
-#define FUNCTION 4
-#define SCROLL 5
-#define WIRELESS 6
+#define SYMBOL 2
+#define NUMBER 3
+#define FUNCTION 4// 元のFunctionレイヤー
+#define BLE_SETTING 5
+#define DEFAULT_LAYER_2 6 // 2つ目のデフォルトレイヤー
+#define MARK 7
+#define CURSOR 8
+#define FUNCTION_LOWER 9       // 追加されたFUNCTIONレイヤー
+#define SCROLL 10        // ここを10に修正！
+#define WIRELESS 11      // ここを11に修正！
 
 //mouse cursol
 
