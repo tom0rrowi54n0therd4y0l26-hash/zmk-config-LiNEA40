@@ -16,6 +16,7 @@
 };
 
 &zip_temp_layer {        // 下記のキーを押したらマウスモードを強制終了
+    layer = <1>; // ★ ターゲットをMOUSEレイヤー(1)に固定
     excluded-positions = <
         //7  // I
         //16 // J
