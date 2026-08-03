@@ -60,7 +60,12 @@
 };
 
 &trackball_listener {
-    input-processors = <&mouse_runtime_input_processor>; //DYA Studio対応のため追加(20260405)
+    // ここはoverlayより後に適用されるため、このinput-processorsがoverlay側の指定を
+    // 完全に置き換える。zip_temp_layerを書き忘れるとオートマウスレイヤーが働かず、
+    // MOUSEレイヤー上の&mkp MB1/MB2(左右クリック)が押せなくなるので必ず両方書く。
+    input-processors =
+        <&zip_temp_layer MOUSE 10000>,       //トラボ使用後10秒間MOUSEレイヤーが有効
+        <&mouse_runtime_input_processor>;    //DYA Studio対応のため追加(20260405)
 
     scroller {
         layers = <SCROLL>;
