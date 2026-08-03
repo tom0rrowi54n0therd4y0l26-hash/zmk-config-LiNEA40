@@ -99,3 +99,9 @@
         status = "disabled";
     };
 };
+
+// 両手ともNFCピンをGPIOとして使用している(左:col4-NFC2/col5-NFC1、右:col4-NFC2とトラックボールのCS)。
+// Zephyr 4.1でCONFIG_NFCT_PINS_AS_GPIOSが廃止されたため、devicetree側で指定する。
+&uicr {
+    nfct-pins-as-gpios;
+};
