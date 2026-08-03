@@ -6,6 +6,8 @@ manifest:
       url-base: https://github.com/inorichi
     - name: caksoylar
       url-base: https://github.com/caksoylar
+    - name: tom0rrowi54n0therd4y0l26-hash
+      url-base: https://github.com/tom0rrowi54n0therd4y0l26-hash
   projects:
     - name: zmk
       remote: cormoran
@@ -24,8 +26,8 @@ manifest:
       remote: cormoran
       revision: main
     - name: zmk-feature-custom-settings
-      remote: cormoran
-      revision: main
+      remote: tom0rrowi54n0therd4y0l26-hash
+      revision: main # fork of cormoran/zmk-feature-custom-settings with the Kconfig "configdefault" syntax-error fixed
     - name: zmk-pmw3610-driver
       remote: inorichi
       revision: main
