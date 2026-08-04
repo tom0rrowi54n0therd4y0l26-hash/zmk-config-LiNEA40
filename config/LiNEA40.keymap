@@ -3,6 +3,7 @@
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
 #include <input/processors/runtime-input-processor.dtsi> //DYA Studio対応のため追加(20260405)
+#include <behaviors/runtime-input-processor.dtsi> //DPI一時変更(&rip_ldpi/&rip_hdpi)用
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
@@ -59,6 +60,19 @@
     };
 };
 
+// DPI一時変更ビヘイビア(モジュール既定は 0.5x / 1.5x)。
+// 「もう少し」の変化量にしたいので 2/3 倍・3/2 倍に調整。
+// 数値を変えれば効き具合を変えられる(分子=scale-multiplier, 分母=scale-divisor)。
+&rip_ldpi {
+    scale-multiplier = <2>;
+    scale-divisor = <3>;    // 約0.67倍(遅く)
+};
+
+&rip_hdpi {
+    scale-multiplier = <3>;
+    scale-divisor = <2>;    // 1.5倍(速く)
+};
+
 &trackball_listener {
     // ここはoverlayより後に適用されるため、このinput-processorsがoverlay側の指定を
     // 完全に置き換える。zip_temp_layerを書き忘れるとオートマウスレイヤーが働かず、
@@ -67,14 +81,11 @@
         <&zip_temp_layer MOUSE 10000>,       //トラボ使用後10秒間MOUSEレイヤーが有効
         <&mouse_runtime_input_processor>;    //DYA Studio対応のため追加(20260405)
 
-    scroller {
-        layers = <SCROLL>;
-        input-processors =
-            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転
-            <&zip_xy_to_scroll_mapper>,
-            <&scroll_runtime_input_processor>; // ★DYA Studio対応のためここに追加
-    };
+    // scroller(input-processorでXY→スクロール変換する経路)は廃止した。
+    // SCROLLレイヤーのスクロールは overlay の scroll-layers = <5 10> により
+    // PMW3610ドライバ側で行う(SPACE長押しのスクロールと同じ仕組みに統一)。
+    // ここを残すとレイヤー10で二重に変換が走り、かつ scroll_runtime_input_processor は
+    // エンコーダ(&msc_input_listener)と倍率を共有しているため速度がおかしくなる。
 };
 
 / {
@@ -129,6 +140,21 @@
 
             tap-ms = <20>;
         };
+
+        // 標準の &lt に quick-tap-ms を足したもの。
+        // 「1回叩いて、すぐもう一度押しっぱなし」にするとタップ側のキーが押されっぱなしになり、
+        // OSのキーリピートが効く(BackSpace/Spaceの連続入力用)。
+        // 単独の長押しは従来どおりレイヤー切替なので既存の操作は壊れない。
+        lt_rpt: layer_tap_repeat {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            bindings = <&mo>, <&kp>;
+
+            display-name = "Layer-Tap (repeat)";
+        };
     };
 
     macros {
@@ -153,9 +179,9 @@
         DEFAULT {
             bindings = <
 &kp Q             &kp W         &kp E                   &kp R   &kp T                                      &kp Y        &kp U  &kp I      &kp O              &kp P
-&kp A             &kp S         &kp D                   &kp F   &kp G                                      &kp H        &kp J  &kp K      &kp L              &kp MINUS
+&kp A             &kp S         &kp D                   &kp F   &kp G                                      &kp H        &lt SCROLL J  &kp K  &kp L          &kp MINUS
 &mt LEFT_SHIFT Z  &kp X         &kp C                   &kp V   &kp B                                      &kp N        &kp M  &kp COMMA  &kp PERIOD         &mt RIGHT_SHIFT SLASH
-&mt LCTRL ESC     &kp LEFT_WIN  &mt LEFT_ALT LS(LG(S))  &trans  &lt 4 TAB  &lt 2 ENTER    &lt 3 BACKSPACE  &lt 5 SPACE         &kp COLON  &kp DOUBLE_QUOTES  &kp SINGLE_QUOTE
+&mt LCTRL ESC     &kp LEFT_WIN  &mt LEFT_ALT LS(LG(S))  &trans  &lt 4 TAB  &lt 2 ENTER    &lt_rpt 3 BACKSPACE  &lt_rpt 5 SPACE     &kp COLON  &kp DOUBLE_QUOTES  &kp SINGLE_QUOTE
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -163,7 +189,7 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans    &rip_ldpi  &rip_hdpi
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &mkp MB1  &mkp MB2  &trans
 &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans    &trans    &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans    &trans    &trans

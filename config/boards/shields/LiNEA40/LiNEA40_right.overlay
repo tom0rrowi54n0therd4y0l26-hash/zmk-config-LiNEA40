@@ -23,7 +23,9 @@
     // MOUSEレイヤー上のキー(左右クリック等)は必ずここに入れること。
     excluded-positions = <
         //7  // I
-        //16 // J
+        8  // O … MOUSEレイヤーで&rip_ldpi(DPIを下げる)
+        9  // P … MOUSEレイヤーで&rip_hdpi(DPIを上げる)
+        16 // J … 長押しでSCROLLレイヤー(押下でAMLが落ちないように除外)
         17 // K … MOUSEレイヤーで&mkp MB1(左クリック)
         18 // L … MOUSEレイヤーで&mkp MB2(右クリック)
         //27   //,
@@ -71,7 +73,9 @@
         spi-max-frequency = <2000000>;
         irq-gpios = <&xiao_d 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; //MOT-D6
         snipe-layers = <2>;
-        scroll-layers = <5>;
+        // 5 = SPACE長押し、10 = SCROLLレイヤー(J長押し)。
+        // どちらもドライバ側でトラックボールを上下左右スクロールに変換する。
+        scroll-layers = <5 10>;
         //scroll-layers = <4 5 6>;
     };
 };
