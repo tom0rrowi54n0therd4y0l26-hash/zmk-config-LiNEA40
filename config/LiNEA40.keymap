@@ -52,7 +52,14 @@
 };
 
 &msc_input_listener {
-    input-processors = <&scroll_runtime_input_processor>; //DYA Studio対応のため追加(20260405)
+    // ここは左手エンコーダのスクロール経路。
+    // 以前は <&scroll_runtime_input_processor> を通していたが外した。理由:
+    //  ・トラックボールのスクロールはPMW3610ドライバ側で処理しており、この経路は通らない。
+    //    そのためDYA Studioで"scroll"の倍率をいじってもトラックボールには効かず、
+    //    エンコーダだけが遅く(または動かなく)なってしまう。
+    //  ・外すことでエンコーダ側はフラッシュに保存された設定の影響を受けなくなり、
+    //    DYA導入前と同じ挙動(ZMK_POINTING_DEFAULT_SCRL_VAL がそのまま効く)に戻る。
+    // 左手側の速度を変えたいときはファイル冒頭の ZMK_POINTING_DEFAULT_SCRL_VAL を調整する。
 
     speed_up {
         layers = <FUNCTION>;
