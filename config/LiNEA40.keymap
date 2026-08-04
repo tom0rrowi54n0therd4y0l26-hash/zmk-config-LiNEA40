@@ -141,10 +141,15 @@
             tap-ms = <20>;
         };
 
-        // 標準の &lt に quick-tap-ms を足したもの。
+        // 標準の &lt に quick-tap-ms を足したもの。Enter / BackSpace / Space に使用。
         // 「1回叩いて、すぐもう一度押しっぱなし」にするとタップ側のキーが押されっぱなしになり、
-        // OSのキーリピートが効く(BackSpace/Spaceの連続入力用)。
-        // 単独の長押しは従来どおりレイヤー切替なので既存の操作は壊れない。
+        // OSのキーリピートが効く。単独の長押しは従来どおりレイヤー切替。
+        //
+        // quick-tap-ms = 2回目を押すまでの猶予。他のホールドタップの待機時間
+        //                (tapping-term-ms) と同じ200msに揃えてある。長くすると
+        //                ゆっくり押し直しても連打になるが、その分誤爆しやすい。
+        // ※リピート開始までの待ち時間と連打速度は「キーを押しっぱなしにしている」
+        //   状態をOSが解釈して決めるので、他のキーと自動的に同じになる(ZMK側では制御しない)。
         lt_rpt: layer_tap_repeat {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -181,7 +186,7 @@
 &kp Q             &kp W         &kp E                   &kp R   &kp T                                      &kp Y        &kp U  &kp I      &kp O              &kp P
 &kp A             &kp S         &kp D                   &kp F   &kp G                                      &kp H        &lt SCROLL J  &kp K  &kp L          &kp MINUS
 &mt LEFT_SHIFT Z  &kp X         &kp C                   &kp V   &kp B                                      &kp N        &kp M  &kp COMMA  &kp PERIOD         &mt RIGHT_SHIFT SLASH
-&mt LCTRL ESC     &kp LEFT_WIN  &mt LEFT_ALT LS(LG(S))  &trans  &lt 4 TAB  &lt 2 ENTER    &lt_rpt 3 BACKSPACE  &lt_rpt 5 SPACE     &kp COLON  &kp DOUBLE_QUOTES  &kp SINGLE_QUOTE
+&mt LCTRL ESC     &kp LEFT_WIN  &mt LEFT_ALT LS(LG(S))  &trans  &lt 4 TAB  &lt_rpt 2 ENTER    &lt_rpt 3 BACKSPACE  &lt_rpt 5 SPACE     &kp COLON  &kp DOUBLE_QUOTES  &kp SINGLE_QUOTE
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
