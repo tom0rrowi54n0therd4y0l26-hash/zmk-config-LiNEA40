@@ -2,3 +2,6 @@ config ZMK_INPUT_PROCESSOR_GESTURE_NAV
     bool "Gesture navigation input processor (pointer swipe -> behaviors)"
     default y
     depends on DT_HAS_ZMK_INPUT_PROCESSOR_GESTURE_NAV_ENABLED
+    # ビヘイビアのキュー(behavior_queue.c)は親機でしかビルドされない。
+    # トラックボールは右手=親機にあるので、子機(左手)では無効にしておく。
+    depends on !ZMK_SPLIT || ZMK_SPLIT_ROLE_CENTRAL
