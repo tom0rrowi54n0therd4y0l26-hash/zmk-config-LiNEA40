@@ -1,0 +1,34 @@
+description: |
+  ポインタの横移動を積算し、しきい値を超えたらビヘイビアを1回発火する入力プロセッサ。
+  bindings[0] = 左へ動かしたとき、bindings[1] = 右へ動かしたとき。
+  処理中のポインタ移動は打ち消す(カーソルは動かない)。
+
+compatible: "zmk,input-processor-gesture-nav"
+
+include: ip_zero_param.yaml
+
+properties:
+  bindings:
+    type: phandle-array
+    required: true
+    description: 左方向・右方向で発火するビヘイビア(この順で2つ)
+
+  threshold:
+    type: int
+    default: 150
+    description: 発火に必要な横方向の移動量(センサーのカウント数)
+
+  cooldown-ms:
+    type: int
+    default: 400
+    description: 発火後、次の発火を受け付けない時間
+
+  idle-reset-ms:
+    type: int
+    default: 200
+    description: この時間動きが無ければ積算をリセット(わずかなブレの蓄積防止)
+
+  tap-ms:
+    type: int
+    default: 30
+    description: 発火時にビヘイビアを押している時間

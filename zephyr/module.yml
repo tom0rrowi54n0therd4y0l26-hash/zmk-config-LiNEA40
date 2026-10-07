@@ -1,0 +1,6 @@
+name: linea40-gesture-nav
+build:
+  cmake: .
+  kconfig: Kconfig
+  settings:
+    dts_root: .

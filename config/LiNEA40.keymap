@@ -22,6 +22,7 @@
 #define FUNCTION_LOWER 9       // 追加されたFUNCTIONレイヤー
 #define SCROLL 10
 #define WIRELESS 11
+#define GESTURE 12     // "-"長押し中だけ有効。ボール左右でブラウザの戻る/進む
 
 //mouse cursol
 &mmv {
@@ -47,6 +48,18 @@
             type = <INPUT_EV_REL>;
             codes = <INPUT_REL_WHEEL>;
             track-remainders;
+        };
+
+        // 自作プロセッサ(リポジトリ直下 src/input_processor_gesture_nav.c)。
+        // ボールの横移動を積算し、threshold を超えたら1回だけ発火する。
+        //   左 → MB4(ブラウザの戻る) / 右 → MB5(進む)
+        // MB4/MB5は標準のマウスボタンなので、PC側にソフト不要(Edge/Chrome共通)。
+        zip_gesture_nav: zip_gesture_nav {
+            compatible = "zmk,input-processor-gesture-nav";
+            #input-processor-cells = <0>;
+            bindings = <&mkp MB4>, <&mkp MB5>;
+            threshold = <150>;      // 反応に必要な振り幅。小さいほど敏感
+            cooldown-ms = <400>;    // 1回振って複数回戻らないための間隔
         };
     };
 };
@@ -93,6 +106,13 @@
     // PMW3610ドライバ側で行う(SPACE長押しのスクロールと同じ仕組みに統一)。
     // ここを残すとレイヤー10で二重に変換が走り、かつ scroll_runtime_input_processor は
     // エンコーダ(&msc_input_listener)と倍率を共有しているため速度がおかしくなる。
+
+    // "-"長押し(GESTUREレイヤー)中は、上の通常処理の代わりにジェスチャ判定だけを通す。
+    // process-next を付けていないので zip_temp_layer やカーソル移動は走らない。
+    gesture {
+        layers = <GESTURE>;
+        input-processors = <&zip_gesture_nav>;
+    };
 };
 
 / {
@@ -191,7 +211,7 @@
         DEFAULT {
             bindings = <
 &kp Q             &kp W         &kp E                   &kp R   &kp T                                      &kp Y        &kp U  &kp I      &kp O              &kp P
-&kp A             &kp S         &kp D                   &kp F   &kp G                                      &kp H        &lt SCROLL J  &kp K  &kp L          &kp MINUS
+&kp A             &kp S         &kp D                   &kp F   &kp G                                      &kp H        &lt SCROLL J  &kp K  &kp L          &lt GESTURE MINUS
 &mt LEFT_SHIFT Z  &kp X         &kp C                   &kp V   &kp B                                      &kp N        &kp M  &kp COMMA  &kp PERIOD         &mt RIGHT_SHIFT SLASH
 &mt LCTRL ESC     &kp LEFT_WIN  &mt LEFT_ALT LS(LG(S))  &trans  &lt 4 TAB  &lt_rpt 2 ENTER    &lt_rpt 3 BACKSPACE  &lt_rpt 5 SPACE     &kp COLON  &kp DOUBLE_QUOTES  &kp SINGLE_QUOTE
             >;
@@ -316,6 +336,16 @@
             >;
 
             sensor-bindings = <&inc_dec_kp RIGHT_ARROW LEFT_ARROW>;
+        };
+
+        // "-"長押しで有効。キーは全て下のレイヤーのまま(ボールのジェスチャ専用)。
+        GESTURE {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans          &trans  &trans  &trans
+            >;
         };
     };
 };
